@@ -44,6 +44,7 @@ public class LevelSelectManager : MonoBehaviour
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
         PlayerPrefs.SetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1) + 1);
+        DisplayLevelSelection();
     }
 
     public void DisplayLevelSelection()
