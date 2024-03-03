@@ -10,6 +10,10 @@ using UnityEngine;
 3 = Spell-checking
 4 = Grammar-checking
 5 = Pronunciation-checking
+6 = Translate: Matching Type
+7 = Conversate: Multiple Choice
+8 = Conversate: Constructing
+9 = Image-recognizing
 */
 
 [CreateAssetMenu(fileName = "New Lecture", menuName = "Lecture")]

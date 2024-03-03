@@ -9,12 +9,12 @@ public class LectureReference : MonoBehaviour
     private StageManager stageManager;
 
     public void Start() {
-        stageManager = GameObject.FindGameObjectWithTag("scripts").GetComponent<StageManager>();
+        stageManager = GameObject.FindGameObjectWithTag("MainScript").GetComponent<StageManager>();
         gameObject.GetComponent<Button>().onClick.AddListener(OnButtonPress);
     }
 
     public void OnButtonPress() {
-        stageManager.chapterUi.SetActive(false);
+        stageManager.levelSelectUi.SetActive(false);
         stageManager.lectureUi.SetActive(true);
 
         GameObject currentLecture = stageManager.lectureUi.transform.GetChild(lectureInfo.lectureType).gameObject;

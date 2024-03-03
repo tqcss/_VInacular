@@ -52,8 +52,8 @@ public class LectureManager : MonoBehaviour
 
         switch (lectureInfo.lectureType) {
             case 0: // LECTURE
-                text1.text = lectureInfo.language[PlayerPrefs.GetString("BaseLanguage")];
-                text2.text = lectureInfo.language[PlayerPrefs.GetString("TargetLanguage")];
+                text1.text = lectureInfo.language[PlayerPrefs.GetString("BaseLanguage", "english")];
+                text2.text = lectureInfo.language[PlayerPrefs.GetString("TargetLanguage", "akeanon")];
                 break;
             case 1: // MULTIPLE CHOICE
                 for (int i = 0; i < 4; i++) {
