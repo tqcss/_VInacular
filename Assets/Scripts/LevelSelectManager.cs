@@ -44,6 +44,7 @@ public class LevelSelectManager : MonoBehaviour
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
         PlayerPrefs.SetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1) + 1);
+        RemoveLevelButtons();
         DisplayLevelSelection();
     }
 
@@ -73,11 +74,13 @@ public class LevelSelectManager : MonoBehaviour
             
             if (_unlockedLevels < i + 1)
             { 
+                newLevelButton.transform.GetComponent<Button>().interactable = false;
                 newLevelButton.transform.GetComponent<Image>().sprite = levelButtonSprites[0];
             }
             else if (_unlockedLevels == i + 1)
             { 
                 int _levelSelected = i + 1;
+                newLevelButton.transform.GetComponent<Button>().interactable = true;
                 newLevelButton.transform.GetComponent<Image>().sprite = levelButtonSprites[1];
                 newLevelButton.transform.GetChild(0).GetComponent<Text>().text = currentChapter.lectures[i].title;
                 newLevelButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[i];
@@ -93,6 +96,7 @@ public class LevelSelectManager : MonoBehaviour
             }
             else if (_unlockedLevels > i + 1)
             {
+                newLevelButton.transform.GetComponent<Button>().interactable = false;
                 newLevelButton.transform.GetComponent<Image>().sprite = levelButtonSprites[2];
                 newLevelButton.transform.GetChild(0).GetComponent<Text>().text = currentChapter.lectures[i].title;
             }
@@ -133,7 +137,7 @@ public class LevelSelectManager : MonoBehaviour
         startButton.transform.GetComponent<Button>().interactable = true;
     }
 
-    public void GoBackToMain()
+    public void GoBackToHome()
     {
         RemoveLevelButtons();
         SceneManager.LoadScene(1);

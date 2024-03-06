@@ -7,6 +7,14 @@ TagManager:
   - lectureUi
   - chapterUi
   - scripts
+  - MainScript
+  - LevelSelectManager
+  - CoinSystem
+  - ExperienceSystem
+  - LifeSystem
+  - DishManager
+  - CharacterSystem
+  - continueButton
   layers:
   - Default
   - TransparentFX

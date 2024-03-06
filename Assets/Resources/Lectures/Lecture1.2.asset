@@ -14,3 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 1.2
   lectureType: 0
+  englishDialog:
+  - English dialog for lecture 1.2
+  filipinoDialog:
+  - Filipino dialog for lecture 1.2
+  hiligaynonDialog: []
+  kinarayaDialog: []
+  akeanonDialog:
+  - Akeanon dialog for lecture 1.2
+  capiznonDialog: []
+  images: []

@@ -20,9 +20,6 @@ public class DisplayOnHome : MonoBehaviour
     public GameObject dialogueBubble;
     public GameObject character;
 
-    public GameObject levsecEnergyBar;
-    public GameObject levsecLifeBar;
-
     private LifeSystem _lifeSystem;
     private CharacterSystem _characterSystem;
     private CoinSystem _coinSystem;

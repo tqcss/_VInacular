@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Reflection;
@@ -20,6 +21,8 @@ public class StageManager : MonoBehaviour
     public GameObject chapterContainer;
     public GameObject lectureContainer;
     public GameObject lectureButtonPrefab;
+    public GameObject validateUi;
+    public GameObject sessionClearedUi;
 
     public Color lightBgColor = new Color(255, 255, 255, 255);
     public Color darkBgColor = new Color(15, 15, 20, 255);
@@ -70,6 +73,7 @@ public class StageManager : MonoBehaviour
         chapters = Resources.LoadAll<Chapter>("Chapters");
 
         _levelSelectManager.DisplayLevelSelection();
+        validateUi.SetActive(false);
 
         /* Make unlocked chapter buttons interactable
         int chaptersUnlocked = PlayerPrefs.GetInt("ChaptersUnlocked");
@@ -103,6 +107,41 @@ public class StageManager : MonoBehaviour
             { levsecLifeBar.transform.GetChild(3).GetComponent<Text>().text = string.Format("{0:0}:{1:00}", Mathf.FloorToInt(_onLifeCooldown / 60), Mathf.FloorToInt(_onLifeCooldown % 60)); }
         else if (_globalLives == 5)
             { levsecLifeBar.transform.GetChild(3).GetComponent<Text>().text = "Full"; }
+    }
+
+    public void ClearLectureUi(int lectureType, int nextLecture)
+    {
+        int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
+        currentChapter = chapters[_selectedChapter - 1];
+
+        GameObject continueButton = GameObject.FindGameObjectWithTag("continueButton");
+        continueButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[nextLecture - 1];
+        lectureUi.transform.GetChild(lectureType).gameObject.SetActive(false);
+    }
+
+    public void DisplayValidate(int mode)
+    {
+        validateUi.SetActive(true);
+        validateUi.transform.GetChild(mode).gameObject.SetActive(true);
+    }
+
+    public void DisplaySessionCleared()
+    {
+        sessionClearedUi.SetActive(true);
+    
+        
+    }
+
+    public void GoBackToMain()
+    {
+        for (int i = 0; i < lectureUi.transform.childCount; i++)
+        {
+            lectureUi.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        lectureUi.SetActive(false);
+        levelSelectUi.SetActive(true);
+        _levelSelectManager.DisplayLevelSelection();
+        _levelSelectManager.RemoveLevelButtons();
     }
 
     /*

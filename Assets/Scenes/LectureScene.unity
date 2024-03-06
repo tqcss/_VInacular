@@ -347,6 +347,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &15013524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,6 +1195,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &116341731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1763,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &217861328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1823,7 @@ MonoBehaviour:
   choiceButtons: []
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 2006739447}
 --- !u!114 &217861331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,6 +2353,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &251094463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,7 +2368,7 @@ GameObject:
   - component: {fileID: 251094465}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2430,7 +2435,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 251094466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 393449236}
+        m_TargetAssemblyTypeName: LectureManager, Assembly-CSharp
+        m_MethodName: submitAnswer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &251094466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3001,6 +3018,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &389161489
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,6 +3196,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!114 &393449237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,7 +3963,7 @@ GameObject:
   - component: {fileID: 474423091}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6736,6 +6755,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &790756027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6898,7 +6918,7 @@ GameObject:
   - component: {fileID: 846618513}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7403,7 +7423,7 @@ GameObject:
   - component: {fileID: 878126675}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7470,7 +7490,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 878126676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1135984128}
+        m_TargetAssemblyTypeName: StageManager, Assembly-CSharp
+        m_MethodName: GoBackToMain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &878126676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8871,7 +8903,7 @@ GameObject:
   - component: {fileID: 988071519}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9966,7 +9998,7 @@ GameObject:
   - component: {fileID: 1127225883}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10369,6 +10401,8 @@ MonoBehaviour:
   chapterContainer: {fileID: 790756027}
   lectureContainer: {fileID: 1948476706}
   lectureButtonPrefab: {fileID: 6984470926089154915, guid: b2a7b268b07a75c4b84bcb96dc7a6482, type: 3}
+  validateUi: {fileID: 2131454040}
+  sessionClearedUi: {fileID: 1023403668}
   lightBgColor: {r: 1, g: 1, b: 1, a: 255}
   darkBgColor: {r: 0.05882353, g: 0.05882353, b: 0.078431375, a: 1}
   darkBarBorder: {fileID: 21300000, guid: 00ae52be27ca10b46824751c135493db, type: 3}
@@ -10385,9 +10419,10 @@ GameObject:
   - component: {fileID: 1138930465}
   - component: {fileID: 1138930464}
   - component: {fileID: 1138930463}
+  - component: {fileID: 1138930466}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10454,7 +10489,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1138930464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 393449236}
+        m_TargetAssemblyTypeName: LectureManager, Assembly-CSharp
+        m_MethodName: finishLecture
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1138930464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10493,6 +10540,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138930461}
   m_CullTransparentMesh: 1
+--- !u!114 &1138930466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138930461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802fc2f9275834048b526ce3ec5074ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lectureInfo: {fileID: 0}
 --- !u!1 &1145042864
 GameObject:
   m_ObjectHideFlags: 0
@@ -11837,7 +11897,7 @@ GameObject:
   - component: {fileID: 1291673976}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13038,7 +13098,7 @@ GameObject:
   - component: {fileID: 1426341987}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13536,7 +13596,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1879256500}
         m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
-        m_MethodName: GoBackToMain
+        m_MethodName: GoBackToHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13596,9 +13656,10 @@ GameObject:
   - component: {fileID: 1512794258}
   - component: {fileID: 1512794257}
   - component: {fileID: 1512794256}
+  - component: {fileID: 1512794259}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13665,7 +13726,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1512794257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 393449236}
+        m_TargetAssemblyTypeName: LectureManager, Assembly-CSharp
+        m_MethodName: tryAgainLecture
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1512794257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13704,6 +13777,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512794254}
   m_CullTransparentMesh: 1
+--- !u!114 &1512794259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512794254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802fc2f9275834048b526ce3ec5074ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lectureInfo: {fileID: 0}
 --- !u!1 &1518511815
 GameObject:
   m_ObjectHideFlags: 0
@@ -15179,7 +15265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 359.99997, y: -667}
+  m_AnchoredPosition: {x: 359.99997, y: -515}
   m_SizeDelta: {x: 720, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638943513
@@ -15318,7 +15404,7 @@ GameObject:
   - component: {fileID: 1667536879}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16350,7 +16436,7 @@ GameObject:
   - component: {fileID: 1796241423}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17262,6 +17348,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &1848906888
 GameObject:
   m_ObjectHideFlags: 0
@@ -18526,6 +18613,7 @@ MonoBehaviour:
   - {fileID: 0}
   choicePrompt: []
   choiceAnswers: []
+  continueButton: {fileID: 0}
 --- !u!1 &1972169980
 GameObject:
   m_ObjectHideFlags: 0
@@ -18791,9 +18879,10 @@ GameObject:
   - component: {fileID: 2006739451}
   - component: {fileID: 2006739450}
   - component: {fileID: 2006739449}
+  - component: {fileID: 2006739452}
   m_Layer: 5
   m_Name: continueButton
-  m_TagString: Untagged
+  m_TagString: continueButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18860,7 +18949,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2006739450}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 217861330}
+        m_TargetAssemblyTypeName: LectureManager, Assembly-CSharp
+        m_MethodName: finishLecture
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2006739450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18899,6 +19000,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006739447}
   m_CullTransparentMesh: 1
+--- !u!114 &2006739452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006739447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802fc2f9275834048b526ce3ec5074ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lectureInfo: {fileID: 0}
 --- !u!1 &2015764984
 GameObject:
   m_ObjectHideFlags: 0
@@ -19157,7 +19271,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2069377303
 MonoBehaviour:
