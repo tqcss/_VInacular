@@ -16,18 +16,18 @@ public class LectureManager : MonoBehaviour
     public string[] choicePrompt;
     public string[] choiceAnswers;
 
-    void ShuffleList<T>(List<T> list)
-    {
-        int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = Random.Range(0, n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value;
-        }
-    }
+    // void ShuffleList<T>(List<T> list)
+    // {
+    //     int n = list.Count;
+    //     while (n > 1)
+    //     {
+    //         n--;
+    //         int k = Random.Range(0, n + 1);
+    //         T value = list[k];
+    //         list[k] = list[n];
+    //         list[n] = value;
+    //     }
+    // }
 
     public void choiceIncorrect() {
         // enter functionality when player makes a wring choice in a mulitple choice uqestion
@@ -47,31 +47,56 @@ public class LectureManager : MonoBehaviour
         }
     }
 
-    public void LoadUi() {
+    public void LoadUi()
+    {
         lectureInfo.loadLanguages();
+        string baseLang = PlayerPrefs.GetString("BaseLanguage", "english");
+        string targetLang = PlayerPrefs.GetString("TargetLang", "akeanon");
 
         switch (lectureInfo.lectureType) {
             case 0: // LECTURE
-                text1.text = lectureInfo.language[PlayerPrefs.GetString("BaseLanguage", "english")];
-                text2.text = lectureInfo.language[PlayerPrefs.GetString("TargetLanguage", "akeanon")];
-                break;
-            case 1: // MULTIPLE CHOICE
-                for (int i = 0; i < 4; i++) {
-                    choiceButtons[i].GetComponent<Text>().text = choiceAnswers[i];
+                if (PlayerPrefs.GetString("BaseLanguage", "english") == "english")
+                {
+                    text1.text = $"Learn some new {targetLang.ToUpper()} words:";
                 }
-                foreach (GameObject button in choiceButtons) {
-                    button.GetComponent<Button>().onClick.AddListener(choiceIncorrect);
+                else
+                {
+                    text1.text = $"Matuto ng bagong {targetLang.ToUpper()} mga salita:";
                 }
 
-                ShuffleList(choiceSequence);
-                text1.text = choicePrompt[choiceSequence[page]];
-                choiceButtons[choiceSequence[page]].GetComponent<Button>().onClick.AddListener(choiceCorrect);
+                for (int i = 0; i < lectureInfo.language[baseLang].Length; i++)
+                {
+                    text2.text += $"{lectureInfo.language[baseLang][i]}: {lectureInfo.language[targetLang][i]}\n";
+                }
+
+                
+                break;
+            case 1: // MULTIPLE CHOICE
+                
                 break;
             case 2:
-                // skip sentence construction for now
+                
                 break;
             case 3: // SPELL CHECKING
 
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break;
+            case 8:
+
+                break;
+            case 9:
+            
                 break;
         }
     }

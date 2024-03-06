@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*   LECTURE TYPE LEGEND
 ------------------------------
@@ -21,14 +22,15 @@ public class Lecture : ScriptableObject
 {
     public string title;
     public int lectureType;
-    public string englishDialog;
-    public string filipinoDialog;
-    public string hiligaynonDialog;
-    public string kinarayaDialog;
-    public string akeanonDialog;
-    public string capiznonDialog;
+    public string[] englishDialog;
+    public string[] filipinoDialog;
+    public string[] hiligaynonDialog;
+    public string[] kinarayaDialog;
+    public string[] akeanonDialog;
+    public string[] capiznonDialog;
+    public Image[] images; // for image multi choice
 
-    public Dictionary<string, string> language = new Dictionary<string, string>();
+    public Dictionary<string, string[]> language = new Dictionary<string, string[]>();
 
     public void loadLanguages() {
         language.Add("english", englishDialog);
