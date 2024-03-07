@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05d0d69038a7174ab1c58012238df7c, type: 3}
-  m_Name: Lecture1.2
+  m_Name: Lecture1.4
   m_EditorClassIdentifier: 
-  title: 1.2
+  title: 1.4
   lectureType: 1
   englishTitle: []
   filipinoTitle: []
@@ -23,24 +23,24 @@ MonoBehaviour:
   hiligaynonWord: []
   kinarayaWord: []
   englishQuestion:
-  - noon
+  - good evening
   filipinoQuestion:
-  - tanghali
+  - magandang gabi
   akeanonChoices:
-  - agahon
-  - troadlaw
-  - hapon
+  - mayad nga agahon
+  - mayad nga hapon
+  - mayad nga gabii
   capiznonChoices:
-  - aga
-  - udto
-  - hapon
+  - maayong aga
+  - maayong hapon
+  - maayong gab-i
   hiligaynonChoices:
-  - aga
-  - udtu
-  - hapun
+  - maayong aga
+  - maayong hapun
+  - maayong gab'i
   kinarayaChoices:
-  - aga
-  - adlawon
-  - hapon
-  correctChoice: 1
+  - mayad nga aga
+  - mayad nga hapon
+  - mayad nga gab-i
+  correctChoice: 2
   images: []

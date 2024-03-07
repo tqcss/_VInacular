@@ -22,22 +22,46 @@ public class Lecture : ScriptableObject
 {
     public string title;
     public int lectureType;
-    public string[] englishDialog;
-    public string[] filipinoDialog;
-    public string[] hiligaynonDialog;
-    public string[] kinarayaDialog;
-    public string[] akeanonDialog;
-    public string[] capiznonDialog;
+    public string[] englishTitle;
+    public string[] filipinoTitle;
+    public string[] englishWord;
+    public string[] filipinoWord;
+    public string[] akeanonWord;
+    public string[] capiznonWord;
+    public string[] hiligaynonWord;
+    public string[] kinarayaWord;
+
+    public string[] englishQuestion;
+    public string[] filipinoQuestion;
+    public string[] akeanonChoices;
+    public string[] capiznonChoices;
+    public string[] hiligaynonChoices;
+    public string[] kinarayaChoices;
+    public int correctChoice;
     public Image[] images; // for image multi choice
 
-    public Dictionary<string, string[]> language = new Dictionary<string, string[]>();
+    public Dictionary<string, string[]> titles = new Dictionary<string, string[]>();
+    public Dictionary<string, string[]> wordEntries = new Dictionary<string, string[]>();
+    public Dictionary<string, string[]> questions = new Dictionary<string, string[]>();
+    public Dictionary<string, string[]> choiceEntries = new Dictionary<string, string[]>();
 
     public void loadLanguages() {
-        language.Add("english", englishDialog);
-        language.Add("filipino", filipinoDialog);
-        language.Add("hiligaynon", hiligaynonDialog);
-        language.Add("kinaraya", kinarayaDialog);
-        language.Add("akeanon", akeanonDialog);
-        language.Add("capiznon", capiznonDialog);
+        titles.Add("english", englishTitle);
+        titles.Add("filipino", filipinoTitle);
+
+        wordEntries.Add("english", englishWord);
+        wordEntries.Add("filipino", filipinoWord);
+        wordEntries.Add("akeanon", akeanonWord);
+        wordEntries.Add("capiznon", capiznonWord);
+        wordEntries.Add("hiligaynon", hiligaynonWord);
+        wordEntries.Add("kinaraya", kinarayaWord);
+
+        questions.Add("english", englishQuestion);
+        questions.Add("filipino", filipinoQuestion);
+
+        choiceEntries.Add("akeanon", akeanonChoices);
+        choiceEntries.Add("capiznon", capiznonChoices);
+        choiceEntries.Add("hiligaynon", hiligaynonChoices);
+        choiceEntries.Add("kinaraya", kinarayaChoices);
     }
 }

@@ -14,13 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 1.1
   lectureType: 0
-  englishDialog:
-  - English dialog for lecture 1.1
-  filipinoDialog:
-  - Filipino dialog for lecture 1.1
-  hiligaynonDialog: []
-  kinarayaDialog: []
-  akeanonDialog:
-  - Akeanon dialog for lecture 1.1
-  capiznonDialog: []
+  englishTitle:
+  - Let's start off with learning the parts of the day.
+  filipinoTitle:
+  - Una nating pag-aralan ang mga bahagi ng araw.
+  englishWord:
+  - morning
+  - noon
+  - afternoon
+  - evening
+  filipinoWord:
+  - umaga
+  - tanghali
+  - hapon
+  - gabi
+  akeanonWord:
+  - agahon
+  - troadlaw
+  - hapon
+  - gabii
+  capiznonWord:
+  - aga
+  - udto
+  - hapon
+  - gab-i
+  hiligaynonWord:
+  - aga
+  - udtu
+  - hapun
+  - gab'i
+  kinarayaWord:
+  - aga
+  - adlawon
+  - hapon
+  - gab-i
+  englishQuestion: []
+  filipinoQuestion: []
+  akeanonChoices: []
+  capiznonChoices: []
+  hiligaynonChoices: []
+  kinarayaChoices: []
+  correctChoice: 0
   images: []

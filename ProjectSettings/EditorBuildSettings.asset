@@ -15,4 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LectureScene.unity
     guid: 6b288805f8611604b98e8c8cbdd63d38
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d1df02fc136d4ea4e92565b44c0d7390, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: a6da2ab2c4abbc040860d0a1df7a54c7, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 31b101334c3d4ea41acae025b06a0e2b, type: 2}

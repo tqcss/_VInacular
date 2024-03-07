@@ -23,6 +23,8 @@ public class StageManager : MonoBehaviour
     public GameObject lectureButtonPrefab;
     public GameObject validateUi;
     public GameObject sessionClearedUi;
+    public GameObject continueButton;
+    public GameObject restartButton;
 
     public Color lightBgColor = new Color(255, 255, 255, 255);
     public Color darkBgColor = new Color(15, 15, 20, 255);
@@ -109,14 +111,15 @@ public class StageManager : MonoBehaviour
             { levsecLifeBar.transform.GetChild(3).GetComponent<Text>().text = "Full"; }
     }
 
-    public void ClearLectureUi(int lectureType, int nextLecture)
+    public void ClearLectureUi(int lectureType, int nextLecture, int isLecture)
     {
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         currentChapter = chapters[_selectedChapter - 1];
 
-        GameObject continueButton = GameObject.FindGameObjectWithTag("continueButton");
-        continueButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[nextLecture - 1];
+        GameObject nextButton = GameObject.FindGameObjectWithTag("nextButton");
+        nextButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[nextLecture - 1];
         lectureUi.transform.GetChild(lectureType).gameObject.SetActive(false);
+        validateUi.SetActive(false);
     }
 
     public void DisplayValidate(int mode)
@@ -129,7 +132,9 @@ public class StageManager : MonoBehaviour
     {
         sessionClearedUi.SetActive(true);
     
-        
+        // Temporary Display
+        sessionClearedUi.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = "Coins Earned: 16";
+        sessionClearedUi.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = "XP Earned: 8";
     }
 
     public void GoBackToMain()

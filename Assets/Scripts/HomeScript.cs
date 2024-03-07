@@ -9,6 +9,7 @@ public class HomeScript : MonoBehaviour
 {
     private string[] baseLanguages = {"english", "filipino"};
     private string[] targetLanguages = {"akeanon", "capiznon", "hiligaynon", "kinaraya"};
+    private List<string> choiceLanguages = new List<string>();
     public string[] languageDescription;
     
     public GameObject mainBackground;
@@ -157,9 +158,9 @@ public class HomeScript : MonoBehaviour
         }
     }
 
-    public void OptionClicked(int targetLangId)
-    {
-        PlayerPrefs.SetString("TargetLanguage", targetLanguages[targetLangId]);
+    public void OptionClicked(int targetId)
+    {   
+        PlayerPrefs.SetString("TargetLanguage", targetLanguages[targetId]);
         PanelDisplay(2);
         DisplayTag();
     }

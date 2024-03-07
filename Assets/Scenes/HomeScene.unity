@@ -6476,8 +6476,6 @@ MonoBehaviour:
   feedCoinsBar: {fileID: 1056909421}
   dialogueBubble: {fileID: 707825274}
   character: {fileID: 1364914997}
-  levsecEnergyBar: {fileID: 0}
-  levsecLifeBar: {fileID: 0}
 --- !u!114 &864310481
 MonoBehaviour:
   m_ObjectHideFlags: 0

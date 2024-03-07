@@ -16,9 +16,8 @@ public class LectureManager : MonoBehaviour
     public Text text1; // text that displays base langauage or question/prompt
     public Text text2; // text used for target language
     public GameObject[] choiceButtons;
-    public string[] choicePrompt;
-    public string[] choiceAnswers;
-    public GameObject continueButton;
+    public GameObject submitButton;
+    public int chosenAnswer;
 
     private CoinSystem _coinSystem;
     private ExperienceSystem _experienceSystem;
@@ -65,7 +64,7 @@ public class LectureManager : MonoBehaviour
     {
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
-        _stageManager.ClearLectureUi(lectureInfo.lectureType, PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1));
+        _stageManager.ClearLectureUi(lectureInfo.lectureType, PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1), 2);
     }
 
     public void choiceCorrect() {
@@ -118,45 +117,57 @@ public class LectureManager : MonoBehaviour
         else
         {
             Debug.Log("Next lecture");
-            _stageManager.ClearLectureUi(lectureInfo.lectureType, PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1));
+            _stageManager.ClearLectureUi(lectureInfo.lectureType, 
+                                         PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1),
+                                         (lectureInfo.lectureType == 0) ? 0 : 1);
         }
+    }
+
+    public void chooseAnswer(int answerId)
+    {
+        submitButton.GetComponent<Button>().interactable = true;
+        chosenAnswer = answerId;
     }
 
     public void submitAnswer()
     {
         // Insert code for checking the answer here.
+        if (chosenAnswer == lectureInfo.correctChoice)
+            choiceCorrect();
+        else
+            choiceIncorrect();
     }
 
     public void LoadUi()
     {
         lectureInfo.loadLanguages();
         string baseLang = PlayerPrefs.GetString("BaseLanguage", "english");
-        string targetLang = PlayerPrefs.GetString("TargetLang", "akeanon");
+        string targetLang = PlayerPrefs.GetString("TargetLanguage", "akeanon");
 
         text1.text = null;
         text2.text = null;
 
         switch (lectureInfo.lectureType) {
             case 0: // LECTURE
-                if (PlayerPrefs.GetString("BaseLanguage", "english") == "english")
-                {
-                    text1.text = $"Learn some new {targetLang.ToUpper()} words:";
-                }
-                else
-                {
-                    text1.text = $"Matuto ng bagong {targetLang.ToUpper()} mga salita:";
-                }
+                text1.text = $"{lectureInfo.titles[baseLang][0]}";
 
-                for (int i = 0; i < lectureInfo.language[baseLang].Length; i++)
+                for (int i = 0; i < lectureInfo.wordEntries[baseLang].Length; i++)
                 {
-                    text2.text += $"{lectureInfo.language[baseLang][i]}: {lectureInfo.language[targetLang][i]}\n";
+                    text2.text += $"{lectureInfo.wordEntries[baseLang][i]} = {lectureInfo.wordEntries[targetLang][i]}\n";
                 }
-
-                
                 break;
+
             case 1: // MULTIPLE CHOICE
-                
+                text1.text = $"{lectureInfo.questions[baseLang][0]}";
+                text2.text = $"{baseLang.ToUpper()}";
+                submitButton.GetComponent<Button>().interactable = false;
+
+                for (int i = 0; i < lectureInfo.choiceEntries[targetLang].Length; i++)
+                {
+                    choiceButtons[i].transform.GetChild(0).GetComponent<Text>().text = $"{lectureInfo.choiceEntries[targetLang][i]}";
+                }
                 break;
+
             case 2:
                 
                 break;

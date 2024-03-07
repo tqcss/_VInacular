@@ -14,7 +14,7 @@ TagManager:
   - LifeSystem
   - DishManager
   - CharacterSystem
-  - continueButton
+  - nextButton
   layers:
   - Default
   - TransparentFX

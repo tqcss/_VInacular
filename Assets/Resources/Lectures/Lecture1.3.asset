@@ -14,13 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 1.3
   lectureType: 0
-  englishDialog:
-  - English dialog for lecture 1.3
-  filipinoDialog:
-  - Filipino dialog for lecture 1.3
-  hiligaynonDialog: []
-  kinarayaDialog: []
-  akeanonDialog:
-  - Akeanon dialog for lecture 1.3
-  capiznonDialog: []
+  englishTitle:
+  - Let's learn few simple greetings we use everyday.
+  filipinoTitle:
+  - Pag-aralan natin ang mga simpleng pagbati na ginagamit pang-araw-araw.
+  englishWord:
+  - good morning
+  - good noon
+  - good afternoon
+  - good evening
+  filipinoWord:
+  - magandang umaga
+  - magandang tanghali
+  - magandang hapon
+  - magandang gabi
+  akeanonWord:
+  - mayad nga agahon
+  - mayad nga troadlaw
+  - mayad nga hapon
+  - mayad nga gabii
+  capiznonWord:
+  - maayong aga
+  - maayong udto
+  - maayong hapon
+  - maayong gab-i
+  hiligaynonWord:
+  - maayong aga
+  - maayong udtu
+  - maayong hapun
+  - maayong gab'i
+  kinarayaWord:
+  - maayad nga aga
+  - maayad nga adlawon
+  - maayad nga hapon
+  - maayad nga gab-i
+  englishQuestion: []
+  filipinoQuestion: []
+  akeanonChoices: []
+  capiznonChoices: []
+  hiligaynonChoices: []
+  kinarayaChoices: []
+  correctChoice: 0
   images: []

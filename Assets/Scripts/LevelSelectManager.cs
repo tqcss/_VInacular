@@ -24,9 +24,11 @@ public class LevelSelectManager : MonoBehaviour
 
     public int levelSelected;
     public int unlockedLevels;
+    private StageManager _stageManager;
 
     private void Awake()
     {
+        _stageManager = GameObject.FindGameObjectWithTag("MainScript").GetComponent<StageManager>();
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
         unlockedLevels = PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1);
@@ -135,6 +137,8 @@ public class LevelSelectManager : MonoBehaviour
     {
         levelSelected = level;
         startButton.transform.GetComponent<Button>().interactable = true;
+
+        
     }
 
     public void GoBackToHome()
