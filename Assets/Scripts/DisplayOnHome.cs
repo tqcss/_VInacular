@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class DisplayOnHome : MonoBehaviour
 {
-    public Image expRankImage;
-    public string[] rankNames;
-    public Sprite[] rankImages;
-
+    public Image expRankMedalImage;
+    public Image expRankRibbonImage;
     public GameObject statsProfile; 
     public GameObject menuEnergyBar;
     public GameObject menuLifeBar;
@@ -20,22 +18,27 @@ public class DisplayOnHome : MonoBehaviour
     public GameObject dialogueBubble;
     public GameObject character;
 
-    private LifeSystem _lifeSystem;
     private CharacterSystem _characterSystem;
     private CoinSystem _coinSystem;
+    private ExperienceSystem _experienceSystem;
+    private LifeSystem _lifeSystem;
 
     private void Awake()
     {
         // Reference the scripts from game objects
-        _lifeSystem = GameObject.FindGameObjectWithTag("LifeSystem").GetComponent<LifeSystem>();
         _characterSystem = GameObject.FindGameObjectWithTag("CharacterSystem").GetComponent<CharacterSystem>();
         _coinSystem = GameObject.FindGameObjectWithTag("CoinSystem").GetComponent<CoinSystem>();
+        _experienceSystem = GameObject.FindGameObjectWithTag("ExperienceSystem").GetComponent<ExperienceSystem>();
+        _lifeSystem = GameObject.FindGameObjectWithTag("LifeSystem").GetComponent<LifeSystem>();
     }
     
     public void DisplayRank()
     {
-        int _globalRank = PlayerPrefs.GetInt("GlobalRank", 1);
-        expRankImage.sprite = rankImages[_globalRank - 1];
+        string _targetLanguage = PlayerPrefs.GetString("TargetLanguage", "akeanon");
+        int _globalRank = PlayerPrefs.GetInt($"{_targetLanguage}Rank", 1);
+        expRankMedalImage.sprite = _experienceSystem.rankMedals[_globalRank - 1];
+        expRankRibbonImage.sprite = _experienceSystem.rankRibbons[_globalRank - 1];
+        
     }
 
     public void DisplayPlayerStats()
@@ -89,14 +92,16 @@ public class DisplayOnHome : MonoBehaviour
     {
         int _numberCorrect = PlayerPrefs.GetInt("NumberCorrect", 0);
         int _numberIncorrect = PlayerPrefs.GetInt("NumberIncorrect", 0);
-        int _globalRank = PlayerPrefs.GetInt("GlobalRank", 1);
-        float _globalExperience = PlayerPrefs.GetFloat("GlobalExperience", 0);
+
+        string _targetLanguage = PlayerPrefs.GetString("TargetLanguage", "akeanon");
+        int _globalRank = PlayerPrefs.GetInt($"{_targetLanguage}Rank", 1);
+        float _globalExperience = PlayerPrefs.GetFloat($"{_targetLanguage}Experience", 0);
         float _expAmountNeeded = PlayerPrefs.GetFloat("ExpAmountNeeded", 0);
 
         statsProfile.transform.GetChild(0).GetComponent<Text>().text = (_numberCorrect == 0 && _numberIncorrect == 0)
             ? "Accuracy: 100.00%"
             : string.Format("Accuracy: {0:0.00}", (float)_numberCorrect / (float)_numberIncorrect);
-        statsProfile.transform.GetChild(1).GetComponent<Text>().text = "Rank: " + rankNames[_globalRank - 1];
+        statsProfile.transform.GetChild(1).GetComponent<Text>().text = "Rank: " + _experienceSystem.rankNames[_globalRank - 1];
         statsProfile.transform.GetChild(2).GetComponent<Text>().text = string.Format("Exp: {0:0.0} / {1:0} XP", _globalExperience, _expAmountNeeded);
     }
 }

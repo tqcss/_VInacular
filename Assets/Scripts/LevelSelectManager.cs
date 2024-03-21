@@ -9,10 +9,6 @@ using UnityEngine.UI;
 
 public class LevelSelectManager : MonoBehaviour
 {
-    private string[] baseLanguages = {"english", "filipino"};
-    private string[] targetLanguages = {"akeanon", "capiznon", "hiligaynon", "kinaraya"};
-    private string[] langChaptersPrefs = {"AkeanonChapters", "CapiznonChapters", "HiligaynonChapters", "KinarayaChapters"};
-
     private Chapter[] chapters = new Chapter[10];
     private Chapter currentChapter;
     
@@ -84,8 +80,8 @@ public class LevelSelectManager : MonoBehaviour
                 int _levelSelected = i + 1;
                 newLevelButton.transform.GetComponent<Button>().interactable = true;
                 newLevelButton.transform.GetComponent<Image>().sprite = levelButtonSprites[1];
-                newLevelButton.transform.GetChild(0).GetComponent<Text>().text = currentChapter.lectures[i].title;
-                newLevelButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[i];
+                newLevelButton.transform.GetChild(0).GetComponent<Text>().text = currentChapter.lectures[i].lectureNumber;
+                startButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[i];
                   
                 EventTrigger clickTrigger = newLevelButton.transform.GetComponent<EventTrigger>();
                 EventTrigger.Entry clickEvent = new EventTrigger.Entry()
@@ -98,9 +94,9 @@ public class LevelSelectManager : MonoBehaviour
             }
             else if (_unlockedLevels > i + 1)
             {
-                newLevelButton.transform.GetComponent<Button>().interactable = false;
+                newLevelButton.transform.GetComponent<Button>().interactable = true;
                 newLevelButton.transform.GetComponent<Image>().sprite = levelButtonSprites[2];
-                newLevelButton.transform.GetChild(0).GetComponent<Text>().text = currentChapter.lectures[i].title;
+                newLevelButton.transform.GetChild(0).GetComponent<Text>().text = currentChapter.lectures[i].lectureNumber;
             }
         }
 
@@ -137,8 +133,6 @@ public class LevelSelectManager : MonoBehaviour
     {
         levelSelected = level;
         startButton.transform.GetComponent<Button>().interactable = true;
-
-        
     }
 
     public void GoBackToHome()

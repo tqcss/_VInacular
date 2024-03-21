@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05d0d69038a7174ab1c58012238df7c, type: 3}
-  m_Name: Lecture1.2
+  m_Name: Lecture 1.1.2
   m_EditorClassIdentifier: 
-  title: 1.2
+  lectureNumber: 1.2
   lectureType: 1
-  englishTitle: []
-  filipinoTitle: []
-  englishWord: []
-  filipinoWord: []
-  akeanonWord: []
-  capiznonWord: []
-  hiligaynonWord: []
-  kinarayaWord: []
-  englishQuestion:
-  - noon
-  filipinoQuestion:
-  - tanghali
+  englishTitle: 
+  filipinoTitle: 
+  englishWords: []
+  filipinoWords: []
+  akeanonWords: []
+  capiznonWords: []
+  hiligaynonWords: []
+  kinarayaWords: []
+  englishQuestion: afternoon
+  filipinoQuestion: tanghali
   akeanonChoices:
   - agahon
   - troadlaw

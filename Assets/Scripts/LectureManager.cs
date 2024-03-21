@@ -33,21 +33,8 @@ public class LectureManager : MonoBehaviour
         _stageManager = GameObject.FindGameObjectWithTag("MainScript").GetComponent<StageManager>();
     }
 
-
-    // void ShuffleList<T>(List<T> list)
-    // {
-    //     int n = list.Count;
-    //     while (n > 1)
-    //     {
-    //         n--;
-    //         int k = Random.Range(0, n + 1);
-    //         T value = list[k];
-    //         list[k] = list[n];
-    //         list[n] = value;
-    //     }
-    // }
-
-    public void choiceIncorrect() {
+    public void ChoiceIncorrect() 
+    {
         int _globalLives = PlayerPrefs.GetInt("GlobalLives", _lifeSystem.maximumLife);
         int _failsBeforeSuccess = PlayerPrefs.GetInt("FailsBeforeSuccess", 0);
 
@@ -55,32 +42,23 @@ public class LectureManager : MonoBehaviour
         PlayerPrefs.SetInt("FailsBeforeSuccess", _failsBeforeSuccess + 1);
 
         _stageManager.DisplayValidate(1);
+        submitButton.GetComponent<Button>().interactable = false;
 
         Debug.Log("Lives: " + PlayerPrefs.GetInt("GlobalLives", _lifeSystem.maximumLife));
         Debug.Log("Fails: " + PlayerPrefs.GetInt("FailsBeforeSuccess", 0));
     }
 
-    public void tryAgainLecture()
+    public void TryAgainLecture()
     {
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
-        _stageManager.ClearLectureUi(lectureInfo.lectureType, PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1), 2);
+        
+        _stageManager.RefreshLectureUi(PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1));
     }
 
-    public void choiceCorrect() {
-        // if (page >= 4) {
-        //     foreach (GameObject button in choiceButtons) {
-        //         button.GetComponent<Button>().onClick.AddListener(choiceIncorrect);
-        //     }
-
-        //     page++;
-        //     text1.text = choicePrompt[choiceSequence[page]];
-        //     choiceButtons[choiceSequence[page]].GetComponent<Button>().onClick.AddListener(choiceCorrect);
-        // } else {
-        //     // enter functinality here for after finished answering all multiple choice questions
-        // }
-
-        const float INITIAL_EXP = 4;
+    public void ChoiceCorrect() 
+    {
+        const float INITIAL_EXP = 1.6f;
         const float INITIAL_COIN = 8;
 
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
@@ -96,19 +74,36 @@ public class LectureManager : MonoBehaviour
         PlayerPrefs.SetInt("FailsBeforeSuccess", 0);
 
         _stageManager.DisplayValidate(0);
+        submitButton.GetComponent<Button>().interactable = false;
 
+        FinishActivity();
         Debug.Log("Granted Experience: " + experienceGrant);
     }
 
-    public void finishLecture()
+    public void FinishActivity()
     {
-        Debug.Log("Go to next lecture");
-        
+        int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
+        string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
+        PlayerPrefs.SetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1) + 1);
+    }
+
+    public void FinishLecture()
+    {
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
         PlayerPrefs.SetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1) + 1);
 
+        GoToNextLecture();
+    }
+
+    public void GoToNextLecture()
+    {
+        Debug.Log("Go to next lecture");
+
+        int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
+        string _targetLanguage = PlayerPrefs.GetString("TargetLanguage");
         currentChapter = chapters[_selectedChapter - 1];
+
         if (PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1) > currentChapter.lectures.Length)
         {
             Debug.Log("Session finished");
@@ -117,39 +112,40 @@ public class LectureManager : MonoBehaviour
         else
         {
             Debug.Log("Next lecture");
-            _stageManager.ClearLectureUi(lectureInfo.lectureType, 
-                                         PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1),
-                                         (lectureInfo.lectureType == 0) ? 0 : 1);
+            _stageManager.RefreshLectureUi(PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1));
         }
     }
 
-    public void chooseAnswer(int answerId)
+    public void ChooseAnswer(int answerId)
     {
         submitButton.GetComponent<Button>().interactable = true;
         chosenAnswer = answerId;
     }
 
-    public void submitAnswer()
+    public void SubmitAnswer()
     {
-        // Insert code for checking the answer here.
         if (chosenAnswer == lectureInfo.correctChoice)
-            choiceCorrect();
+            ChoiceCorrect();
         else
-            choiceIncorrect();
+            ChoiceIncorrect();
+        _stageManager.lectureUi.transform.GetChild(12).gameObject.SetActive(true);
     }
 
     public void LoadUi()
     {
-        lectureInfo.loadLanguages();
+        lectureInfo.LoadLanguages();
         string baseLang = PlayerPrefs.GetString("BaseLanguage", "english");
         string targetLang = PlayerPrefs.GetString("TargetLanguage", "akeanon");
 
         text1.text = null;
         text2.text = null;
+        _stageManager.lectureUi.transform.GetChild(12).gameObject.SetActive(false);
 
-        switch (lectureInfo.lectureType) {
+
+        switch ((int)lectureInfo.lectureType) {
             case 0: // LECTURE
-                text1.text = $"{lectureInfo.titles[baseLang][0]}";
+                text1.text = $"{lectureInfo.titles[baseLang]}";
+                _stageManager.lectureUi.transform.GetChild(12).gameObject.SetActive(true);
 
                 for (int i = 0; i < lectureInfo.wordEntries[baseLang].Length; i++)
                 {
@@ -157,8 +153,8 @@ public class LectureManager : MonoBehaviour
                 }
                 break;
 
-            case 1: // MULTIPLE CHOICE
-                text1.text = $"{lectureInfo.questions[baseLang][0]}";
+            case 1: // TRANSLATE: MULTIPLE CHOICE
+                text1.text = $"{lectureInfo.questions[baseLang]}";
                 text2.text = $"{baseLang.ToUpper()}";
                 submitButton.GetComponent<Button>().interactable = false;
 
@@ -172,10 +168,26 @@ public class LectureManager : MonoBehaviour
                 
                 break;
             case 3: // SPELL CHECKING
+                text1.text = $"{lectureInfo.questions[baseLang]}";
+                text2.text = $"{baseLang.ToUpper()}";
+                submitButton.GetComponent<Button>().interactable = false;
 
+                for (int i = 0; i < lectureInfo.choiceEntries[targetLang].Length; i++)
+                {
+                    choiceButtons[i].transform.GetChild(0).GetComponent<Text>().text = $"{lectureInfo.choiceEntries[targetLang][i]}";
+                }
+                
                 break;
-            case 4:
+            case 4: // GRAMMAR-CHECKING
+                text1.text = $"{lectureInfo.questions[baseLang]}";
+                text2.text = $"{baseLang.ToUpper()}";
+                submitButton.GetComponent<Button>().interactable = false;
 
+                for (int i = 0; i < lectureInfo.choiceEntries[targetLang].Length; i++)
+                {
+                    choiceButtons[i].transform.GetChild(0).GetComponent<Text>().text = $"{lectureInfo.choiceEntries[targetLang][i]}";
+                }
+                
                 break;
             case 5:
 
@@ -183,7 +195,14 @@ public class LectureManager : MonoBehaviour
             case 6:
 
                 break;
-            case 7:
+            case 7: // CONVERSATE: MULTIPLE CHOICE
+                text1.text = $"{lectureInfo.questions[baseLang]}";
+                submitButton.GetComponent<Button>().interactable = false;
+
+                for (int i = 0; i < lectureInfo.choiceEntries[targetLang].Length; i++)
+                {
+                    choiceButtons[i].transform.GetChild(0).GetComponent<Text>().text = $"{lectureInfo.choiceEntries[targetLang][i]}";
+                }
 
                 break;
             case 8:

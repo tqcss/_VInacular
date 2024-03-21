@@ -7,9 +7,7 @@ using UnityEngine.UI;
 
 public class HomeScript : MonoBehaviour
 {
-    private string[] baseLanguages = {"english", "filipino"};
     private string[] targetLanguages = {"akeanon", "capiznon", "hiligaynon", "kinaraya"};
-    private List<string> choiceLanguages = new List<string>();
     public string[] languageDescription;
     
     public GameObject mainBackground;
@@ -29,13 +27,11 @@ public class HomeScript : MonoBehaviour
     public Sprite[] languageTags;
 
     public int akeanonChapters, capiznonChapters, hiligaynonChapters, kinarayaChapters;
-    private const int MAX_CHAPTER = 5;
     private const int MAX_PANEL = 5;
     private const int MAX_NATIVE_LANG = 4;
 
     private DisplayOnHome _displayOnHome;
     private ExperienceSystem _experienceSystem;
-    private LevelSelectManager _levelSelectManager;
     
     private void Start()
     {
@@ -129,13 +125,15 @@ public class HomeScript : MonoBehaviour
 
     public void DisplayLangSelector()
     {
-        int _targetLangId = Array.IndexOf(targetLanguages, PlayerPrefs.GetString("TargetLanguage", "akeanon"));
-        int _globalRank = PlayerPrefs.GetInt(_experienceSystem.globalLangRanks[_targetLangId], 1);
-        float _globalExperience = PlayerPrefs.GetFloat(_experienceSystem.globalLangExperience[_targetLangId], 0);
+        string _targetLanguage = PlayerPrefs.GetString("TargetLanguage", "akeanon");
+        int _targetLangId = Array.IndexOf(targetLanguages, _targetLanguage);
+
+        int _globalRank = PlayerPrefs.GetInt($"{_targetLanguage}Rank", 1);
+        float _globalExperience = PlayerPrefs.GetFloat($"{_targetLanguage}Experience", 0);
 
         langPickerPanel.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<Text>().text = targetLanguages[_targetLangId].ToUpper();
         langPickerPanel.transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<Text>().text = languageDescription[_targetLangId];
-        langPickerPanel.transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetComponent<Text>().text = "Rank: " + _displayOnHome.rankNames[_globalRank];
+        langPickerPanel.transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetComponent<Text>().text = "Rank: " + _experienceSystem.rankNames[_globalRank - 1];
         langPickerPanel.transform.GetChild(1).GetChild(0).GetChild(3).GetChild(3).GetComponent<Text>().text = string.Format("Exp: {0:0.0}", _globalExperience);
 
         for (int i = 0; i < MAX_NATIVE_LANG - 1; i++)

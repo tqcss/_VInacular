@@ -18,53 +18,23 @@ public class StageManager : MonoBehaviour
     public GameObject lectureUi;
     public GameObject levsecEnergyBar;
     public GameObject levsecLifeBar;
-    public GameObject chapterContainer;
-    public GameObject lectureContainer;
-    public GameObject lectureButtonPrefab;
     public GameObject validateUi;
     public GameObject sessionClearedUi;
-    public GameObject continueButton;
-    public GameObject restartButton;
 
     public Color lightBgColor = new Color(255, 255, 255, 255);
     public Color darkBgColor = new Color(15, 15, 20, 255);
-    public Sprite darkBarBorder;
     public Sprite lightBarBorder;
+    public Sprite darkBarBorder;
+    public Sprite lightRectBlur;
+    public Sprite darkRectBlur;
 
     private LifeSystem _lifeSystem;
     private CharacterSystem _characterSystem;
     private CoinSystem _coinSystem;
     private LevelSelectManager _levelSelectManager;
 
-    /*
-    void InitialDebug()
-    {
-        // Number of chapters unlocked
-        PlayerPrefs.SetInt("ChaptersUnlocked", 5);
-
-        // Number of lectures unlocked in chapter
-        PlayerPrefs.SetInt("Chapter1Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter2Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter3Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter4Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter5Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter6Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter7Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter8Unlocked", 1);
-        PlayerPrefs.SetInt("Chapter9Unlocked", 1); 
-        PlayerPrefs.SetInt("Chapter10Unlocked", 1);
-
-        // Lanugages
-        // should be all lowercase and no dashes
-        PlayerPrefs.SetString("BaseLanguage", "english");
-        PlayerPrefs.SetString("TargetLanguage", "akeanon");
-    }
-    */
-
     private void Awake()
     {
-        // InitialDebug();
-
         // Reference the scripts from game objects
         _lifeSystem = GameObject.FindGameObjectWithTag("LifeSystem").GetComponent<LifeSystem>();
         _characterSystem = GameObject.FindGameObjectWithTag("CharacterSystem").GetComponent<CharacterSystem>();
@@ -75,15 +45,9 @@ public class StageManager : MonoBehaviour
         chapters = Resources.LoadAll<Chapter>("Chapters");
 
         _levelSelectManager.DisplayLevelSelection();
+        levelSelectUi.SetActive(true);
+        lectureUi.SetActive(false);
         validateUi.SetActive(false);
-
-        /* Make unlocked chapter buttons interactable
-        int chaptersUnlocked = PlayerPrefs.GetInt("ChaptersUnlocked");
-        for (int i = 0; i < chaptersUnlocked; i++)
-        {
-            chapterContainer.GetComponentsInChildren<Button>()[i].interactable = true;
-        }
-        */
     }
 
     private void Update()
@@ -100,6 +64,7 @@ public class StageManager : MonoBehaviour
         mainBackground.transform.GetChild(0).GetComponent<Image>().color = (PlayerPrefs.GetInt("SetDarkMode", 0) == 1) ? darkBgColor : lightBgColor;
         levelSelectUi.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>().sprite = (PlayerPrefs.GetInt("SetDarkMode", 0) == 1) ? darkBarBorder : lightBarBorder;
         levelSelectUi.transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<Image>().sprite = (PlayerPrefs.GetInt("SetDarkMode", 0) == 1) ? darkBarBorder : lightBarBorder;
+        levelSelectUi.transform.GetChild(1).GetChild(3).GetComponent<Image>().sprite = (PlayerPrefs.GetInt("SetDarkMode", 0) == 1) ? darkRectBlur : lightRectBlur;
 
         levsecEnergyBar.transform.GetComponent<Slider>().value = _c_energy / 100.0f;
         levsecEnergyBar.transform.GetChild(3).GetComponent<Text>().text = string.Format("{0:0}%", _c_energy);
@@ -111,15 +76,22 @@ public class StageManager : MonoBehaviour
             { levsecLifeBar.transform.GetChild(3).GetComponent<Text>().text = "Full"; }
     }
 
-    public void ClearLectureUi(int lectureType, int nextLecture, int isLecture)
+    public void RefreshLectureUi(int nextLecture)
     {
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         currentChapter = chapters[_selectedChapter - 1];
 
         GameObject nextButton = GameObject.FindGameObjectWithTag("nextButton");
         nextButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[nextLecture - 1];
-        lectureUi.transform.GetChild(lectureType).gameObject.SetActive(false);
+        
+        for (int i = 0; i < lectureUi.transform.childCount - 1; i++)
+        {
+            lectureUi.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        
         validateUi.SetActive(false);
+        validateUi.transform.GetChild(0).gameObject.SetActive(false);
+        validateUi.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     public void DisplayValidate(int mode)
@@ -133,45 +105,20 @@ public class StageManager : MonoBehaviour
         sessionClearedUi.SetActive(true);
     
         // Temporary Display
-        sessionClearedUi.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = "Coins Earned: 16";
-        sessionClearedUi.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = "XP Earned: 8";
+        sessionClearedUi.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = "Coins Earned: ";
+        sessionClearedUi.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = "XP Earned: ";
     }
 
     public void GoBackToMain()
     {
-        for (int i = 0; i < lectureUi.transform.childCount; i++)
+        for (int i = 0; i < lectureUi.transform.childCount - 1; i++)
         {
             lectureUi.transform.GetChild(i).gameObject.SetActive(false);
         }
+
         lectureUi.SetActive(false);
         levelSelectUi.SetActive(true);
         _levelSelectManager.DisplayLevelSelection();
         _levelSelectManager.RemoveLevelButtons();
     }
-
-    /*
-    public void LoadLectures(int chapterIndex)
-    {
-        currentChapter = chapters[chapterIndex];
-
-        // Destroy old buttons in container and replace with new, updated buttons
-        foreach (Transform child in lectureContainer.transform)
-        {
-            Destroy(child.gameObject);
-            Debug.Log("Destroyed");
-        }
-
-        for (int i = 0; i < currentChapter.lectures.Length; i++)
-        {
-            GameObject lectureButton = Instantiate(lectureButtonPrefab, lectureContainer.transform);
-            lectureButton.transform.GetComponentInChildren<Text>().text = currentChapter.lectures[i].title;
-            lectureButton.transform.GetComponent<LectureReference>().lectureInfo = currentChapter.lectures[i];
-        }
-
-        for (int i = 0; i < PlayerPrefs.GetInt($"Chapter{chapterIndex + 1}Unlocked"); i++)
-        {
-            lectureContainer.transform.GetChild(i).GetComponent<Button>().interactable = true;
-        }
-    }
-    */
 }
