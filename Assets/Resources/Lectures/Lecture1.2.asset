@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 1.2
   lectureType: 1
+<<<<<<< Updated upstream:Assets/Resources/Lectures/Lecture1.2.asset
   englishTitle: []
   filipinoTitle: []
   englishWord: []
@@ -26,6 +27,18 @@ MonoBehaviour:
   - noon
   filipinoQuestion:
   - tanghali
+=======
+  englishTitle: 
+  filipinoTitle: 
+  englishWords: []
+  filipinoWords: []
+  akeanonWords: []
+  capiznonWords: []
+  hiligaynonWords: []
+  kinarayaWords: []
+  englishQuestion: noon
+  filipinoQuestion: tanghali
+>>>>>>> Stashed changes:Assets/Resources/Lectures/Lecture 1.1.2.asset
   akeanonChoices:
   - agahon
   - troadlaw

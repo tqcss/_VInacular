@@ -54,7 +54,12 @@ public class LectureManager : MonoBehaviour
         PlayerPrefs.SetInt("GlobalLives", _globalLives - 1);
         PlayerPrefs.SetInt("FailsBeforeSuccess", _failsBeforeSuccess + 1);
 
+<<<<<<< Updated upstream
         _stageManager.DisplayValidate(1);
+=======
+        _stageManager.DisplayValidate(1, 0, 0);
+        submitButton.GetComponent<Button>().interactable = false;
+>>>>>>> Stashed changes
 
         Debug.Log("Lives: " + PlayerPrefs.GetInt("GlobalLives", _lifeSystem.maximumLife));
         Debug.Log("Fails: " + PlayerPrefs.GetInt("FailsBeforeSuccess", 0));
@@ -67,6 +72,7 @@ public class LectureManager : MonoBehaviour
         _stageManager.ClearLectureUi(lectureInfo.lectureType, PlayerPrefs.GetInt($"{_targetLanguage}Chapter{_selectedChapter}Unlocked", 1), 2);
     }
 
+<<<<<<< Updated upstream
     public void choiceCorrect() {
         // if (page >= 4) {
         //     foreach (GameObject button in choiceButtons) {
@@ -82,6 +88,12 @@ public class LectureManager : MonoBehaviour
 
         const float INITIAL_EXP = 4;
         const float INITIAL_COIN = 8;
+=======
+    public void ChoiceCorrect() 
+    {
+        const float INITIAL_EXP = 1.6f;
+        const float INITIAL_COIN = 8f;
+>>>>>>> Stashed changes
 
         int _selectedChapter = PlayerPrefs.GetInt("SelectedChapter", 1);
         int _failsBeforeSuccess = PlayerPrefs.GetInt("FailsBeforeSuccess", 0);
@@ -95,7 +107,12 @@ public class LectureManager : MonoBehaviour
         _lifeSystem.RewardLife(_failsBeforeSuccess, true);
         PlayerPrefs.SetInt("FailsBeforeSuccess", 0);
 
+<<<<<<< Updated upstream
         _stageManager.DisplayValidate(0);
+=======
+        _stageManager.DisplayValidate(0, coinsGrant, experienceGrant);
+        submitButton.GetComponent<Button>().interactable = false;
+>>>>>>> Stashed changes
 
         Debug.Log("Granted Experience: " + experienceGrant);
     }

@@ -15,11 +15,12 @@ TagManager:
   - DishManager
   - CharacterSystem
   - nextButton
+  - LooseDish
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - LooseItems
   - Water
   - UI
   - 
