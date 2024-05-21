@@ -122,15 +122,10 @@ public class StageManager : MonoBehaviour
         validateUi.SetActive(false);
     }
 
-    public void DisplayValidate(int mode, float grantedCoins, float grantedExp)
+    public void DisplayValidate(int mode)
     {
         validateUi.SetActive(true);
         validateUi.transform.GetChild(mode).gameObject.SetActive(true);
-        if (mode == 0)
-        {
-            validateUi.transform.GetChild(mode).GetChild(3).GetChild(0).GetComponent<Text>().text = "Coins Earned:  " + string.Format("{0:0.00}", grantedCoins);
-            validateUi.transform.GetChild(mode).GetChild(3).GetChild(1).GetComponent<Text>().text = "XP Earned:  " + string.Format("{0:0.00}", grantedExp);
-        }
     }
 
     public void DisplaySessionCleared()
@@ -138,13 +133,8 @@ public class StageManager : MonoBehaviour
         sessionClearedUi.SetActive(true);
     
         // Temporary Display
-<<<<<<< Updated upstream
         sessionClearedUi.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = "Coins Earned: 16";
         sessionClearedUi.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = "XP Earned: 8";
-=======
-        sessionClearedUi.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = "Coins Earned:  ";
-        sessionClearedUi.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = "XP Earned:  ";
->>>>>>> Stashed changes
     }
 
     public void GoBackToMain()
